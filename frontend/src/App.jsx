@@ -7,7 +7,20 @@ function App() {
 
   return (
     <>
-    hello
+    <h1>welcome to the app</h1>
+
+    <SignedOut>
+      <SignInButton mode='modal' />
+    </SignedOut>
+
+
+    <SignedIn>
+      <SignOutButton/>
+    </SignedIn>
+
+    <UserButton/>
+
+
     </>
   )
 };
