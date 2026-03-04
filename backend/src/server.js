@@ -16,7 +16,7 @@ import {serve} from "inngest/express";
 import { inngest, functions } from "./lib/inngest.js";
 import {clerkMiddleware} from "@clerk/express";
 import { protectRoute } from './middleware/protectRoute.js';
-
+import chatRoutes from "./routes/chatRoutes.js";
 let __dirname = path.resolve();
 
 const app = express();
@@ -44,6 +44,10 @@ app.use("/api/inngest",serve({client: inngest, functions}));
 app.get("/health",(req,res)=>{
     res.status(200).json({msg: "server is running"});
 })
+
+
+app.use("/api/chat",chatRoutes);
+app.use("/api/sessions",sessionRoutes);
 
 
 app.get("/video-calls",protectRoute,(req,res)=> {
