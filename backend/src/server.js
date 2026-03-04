@@ -17,6 +17,7 @@ import { inngest, functions } from "./lib/inngest.js";
 import {clerkMiddleware} from "@clerk/express";
 import { protectRoute } from './middleware/protectRoute.js';
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js"
 let __dirname = path.resolve();
 
 const app = express();

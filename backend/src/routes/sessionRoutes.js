@@ -14,5 +14,5 @@ router.post("/:id/end",protectRoute,endSession);
 
 
 
-
+export default router;
 
