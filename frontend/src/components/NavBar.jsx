@@ -5,7 +5,6 @@ import { UserButton } from "@clerk/clerk-react";
 function NavBar() {
   const location = useLocation();
 
-  console.log(location);
 
   const isActive = (path) => location.pathname === path;
 
