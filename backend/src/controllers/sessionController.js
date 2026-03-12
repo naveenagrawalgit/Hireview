@@ -27,7 +27,10 @@ export async function createSession(req,res){
         await streamClient.video.call("default",callId).getOrCreate({
             data:{
                 createed_by_id: clerkId,
-                custom: {problem,difficulty,sessionId:session._id.toString()}
+                custom: {problem,
+                    difficulty,
+                    sessionId:session._id.toString()
+                }
             }
         })
 
@@ -41,14 +44,9 @@ export async function createSession(req,res){
         await channel.create();
 
         res.status(201).json({session})
-
-
-
-
-
     } catch (error) {
         console.log("Error in createSession controller:", error.message);
-        res.status(500).json({message: "Internal Server Error during createSession"});
+        res.status(500).json({message: error.message});
     }
 }
 
@@ -56,6 +54,8 @@ export async function getActiveSessions(_,res){
     try {
         const sessions = await  Session.find({status:"active"})
         .populate("host","name profileImage eamil clerkId")
+        .populate("participant","name profileImage eamil clerkId")
+
         .sort({createdAt:-1})
         .limit(15);
 
@@ -70,6 +70,7 @@ export async function getActiveSessions(_,res){
 
 export async function getMyRecentSessions(req,res){
     try {
+         const userId = req.user._id;
         //where user is either host or participant
 
         const sessions = await Session.find(

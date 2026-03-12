@@ -26,11 +26,7 @@ const Port = 5000;
 
 
 app.use(express.json())
-app.use(cors({
-    
-    credentials: true
-
-}))
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); //this adds auth field to request object: req.auth()
 
 
