@@ -5,16 +5,16 @@ import { useEndSession, useJoinSession, useSessionById } from "../hooks/useSessi
 import { PROBLEMS } from "../data/problems.js";
 import { executeCode } from "../lib/piston.js";
 import Navbar from "../components/NavBar.jsx";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Panel, Group, Separator } from "react-resizable-panels";
+//import { Panel, Group, Separator } from "react-resizable-panels";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { Loader2Icon, LogOutIcon, PhoneOffIcon } from "lucide-react";
 import CodeEditorPanel from "../components/CodeEditorPanel";
-import OutputPanel from "../components/OutputPanel";
+import { OutputPanel } from "../components/OutputPanel.jsx";
 
 import useStreamClient from "../hooks/useStreamClient";
 import { StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
-import VideoCallUI from "../components/VideoCallUI";
-
+import VideoCallUI from "../components/VideoCallUI.jsx"
 function SessionPage() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -100,10 +100,10 @@ function SessionPage() {
       <Navbar />
 
       <div className="flex-1">
-        <PanelGroup direction="horizontal">
+        <Group orientation="horizontal">
           {/* LEFT PANEL - CODE EDITOR & PROBLEM DETAILS */}
           <Panel defaultSize={50} minSize={30}>
-            <PanelGroup direction="vertical">
+            <Group orientation="vertical">
               {/* PROBLEM DSC PANEL */}
               <Panel defaultSize={50} minSize={20}>
                 <div className="h-full overflow-y-auto bg-base-200">
@@ -227,10 +227,10 @@ function SessionPage() {
                 </div>
               </Panel>
 
-              <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <Separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
               <Panel defaultSize={50} minSize={20}>
-                <PanelGroup direction="vertical">
+                <Group orientation="vertical">
                   <Panel defaultSize={70} minSize={30}>
                     <CodeEditorPanel
                       selectedLanguage={selectedLanguage}
@@ -242,17 +242,17 @@ function SessionPage() {
                     />
                   </Panel>
 
-                  <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+                  <Separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
                   <Panel defaultSize={30} minSize={15}>
                     <OutputPanel output={output} />
                   </Panel>
-                </PanelGroup>
+                </Group>
               </Panel>
-            </PanelGroup>
+            </Group>
           </Panel>
 
-          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <Separator className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
           {/* RIGHT PANEL - VIDEO CALLS & CHAT */}
           <Panel defaultSize={50} minSize={30}>
@@ -287,7 +287,7 @@ function SessionPage() {
               )}
             </div>
           </Panel>
-        </PanelGroup>
+        </Group>
       </div>
     </div>
   );
